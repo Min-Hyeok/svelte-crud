@@ -4,6 +4,8 @@ import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
+import sveltePreprocess from 'svelte-preprocess';
+import alias from '@rollup/plugin-alias';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -41,7 +43,18 @@ export default {
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
-			}
+			},
+			preprocess: sveltePreprocess(),
+		}),
+		alias({
+			entries: [
+				{ find: '@', replacement: './src' },
+				{ find: 'Service', replacement: './src/service' },
+				{ find: 'Pages', replacement: './src/pages' },
+				{ find: 'Components', replacement: './src/components' },
+				{ find: 'Images', replacement: './src/assets/images' },
+				{ find: 'Scss', replacement: './src/assets/scss' },
+			]
 		}),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
