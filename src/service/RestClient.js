@@ -5,9 +5,9 @@ export class RestClient {
     this.#timeout = 5000;
   }
 
-  async get(url) {
+  async get(url, params = '') {
     const response = await Promise.race([
-      fetch(url, {
+      fetch(`${url}${params}`, {
         type: 'GET',
         credentials: 'include'
       }),
@@ -29,7 +29,8 @@ export class RestClient {
         method: 'POST',
         credentials: 'include',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify(params),
       }),

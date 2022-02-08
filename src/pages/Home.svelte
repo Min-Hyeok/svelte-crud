@@ -1,15 +1,23 @@
 <script>
-  import { MemberService } from 'Service/MemberService.js';
-  const client = new MemberService();
+import { BoardService } from 'Service/BoardService.js';
+import { onMount } from 'svelte';
+import { link } from 'svelte-spa-router';
+const board = new BoardService();
+let boardList = [];
 
-  (async () => {
-    const response = await client.getInfo();
+onMount(async () => {
+  const { list, count } = await board.list();
+  boardList = list;
+});
+// (async () => {
+//   const response = await member.getInfo();
 
-    console.log('response', response);
-  })();
+//   console.log('response', response);
+// })();
 </script>
 
 <div>
+  <a href="/write" use:link>글작성</a>
   <div class="table">
     <div class="table-header" style="display: flex;">
       <div class="table-header__item">제목</div>
@@ -18,12 +26,14 @@
       <div class="table-header__item">등록일</div>
     </div>
     <div class="table-content">
-      <div class="table-content__wrapper" style="display: flex;">
-        <div class="table-content__item">제목이당</div>
-        <div class="table-content__item">내용이당</div>
-        <div class="table-content__item">작성자당</div>
-        <div class="table-content__item">2022-99-99</div>
-      </div>
+      {#each boardList as { subject, content, writer, registDate }}
+        <div class="table-content__wrapper" style="display: flex;">
+          <div class="table-content__item">{subject}</div>
+          <div class="table-content__item">{content}</div>
+          <div class="table-content__item">{writer}</div>
+          <div class="table-content__item">{registDate}</div>
+        </div>
+      {/each}
     </div>
   </div>
 </div>

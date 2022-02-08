@@ -6,6 +6,7 @@ const URL = {
   SIGN_UP: baseURL + '/member/signup',
   MEMBER_INFO: baseURL + '/member/getMemberInfo',
   BOARD_LIST: baseURL + '/board/list',
+  BOARD: baseURL + '/board',
 };
 
 export default URL;
