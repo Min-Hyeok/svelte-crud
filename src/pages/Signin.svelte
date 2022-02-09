@@ -1,24 +1,24 @@
 <script>
-  import { MemberService } from 'Service/MemberService.js';
-  import { push } from 'svelte-spa-router';
-  const client = new MemberService();
+import { MemberService } from 'Service/MemberService.js';
+import { push } from 'svelte-spa-router';
+const client = new MemberService();
 
-  let id = '';
-  let password = '';
+let id = '';
+let password = '';
 
-  async function signin() {
-    const response = await client.signin({ id, password });
-    const { error } = response;
+async function signin() {
+  const response = await client.signin({ id, password });
+  const { error } = response;
 
-    if (error) {
-      alert(error);
+  if (error) {
+    alert(error);
 
-      return;
-    }
-
-    alert('로그인 되었습니다.');
-    push('/');
+    return;
   }
+
+  alert('로그인 되었습니다.');
+  push('/');
+}
 </script>
 
 <div>

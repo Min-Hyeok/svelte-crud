@@ -7,13 +7,10 @@ let boardList = [];
 
 onMount(async () => {
   const { list, count } = await board.list();
+
   boardList = list;
 });
-// (async () => {
-//   const response = await member.getInfo();
 
-//   console.log('response', response);
-// })();
 </script>
 
 <div>
@@ -26,9 +23,11 @@ onMount(async () => {
       <div class="table-header__item">등록일</div>
     </div>
     <div class="table-content">
-      {#each boardList as { subject, content, writer, registDate }}
+      {#each boardList as { subject, content, writer, registDate, idx }}
         <div class="table-content__wrapper" style="display: flex;">
-          <div class="table-content__item">{subject}</div>
+          <div class="table-content__item">
+            <a href={`/view/${idx}`} use:link>{subject}</a>
+          </div>
           <div class="table-content__item">{content}</div>
           <div class="table-content__item">{writer}</div>
           <div class="table-content__item">{registDate}</div>

@@ -1,27 +1,27 @@
 <script>
-  import { MemberService } from 'Service/MemberService.js';
-  import { push } from 'svelte-spa-router';
-  const client = new MemberService();
+import { MemberService } from 'Service/MemberService.js';
+import { push } from 'svelte-spa-router';
+const client = new MemberService();
 
-  let id = '';
-  let password = '';
-  let name = '';
-  let email = '';
+let id = '';
+let password = '';
+let name = '';
+let email = '';
 
-  async function signup() {
-    const response = await client.signup({ id, password, name, email });
-    const { error } = response;
+async function signup() {
+  const response = await client.signup({ id, password, name, email });
+  const { error } = response;
 
-    if (error) {
-      alert(error);
+  if (error) {
+    alert(error);
 
-      return;
-    }
-    
-    alert('회원가입 완료');
-    push('/signin');
-
+    return;
   }
+  
+  alert('회원가입 완료');
+  push('/signin');
+
+}
 </script>
 
 <div>

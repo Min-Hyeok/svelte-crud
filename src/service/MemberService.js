@@ -20,7 +20,7 @@ export class MemberService {
     return response;
   }
 
-  async getInfo() {
+  async getUserInfo() {
     const response = await this.#client.get(API.MEMBER_INFO);
 
     return response;

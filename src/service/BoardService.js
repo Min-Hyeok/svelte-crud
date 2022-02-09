@@ -26,4 +26,16 @@ export class BoardService {
     return response;
   }
 
+  async update(params) {
+    const response = await this.#client.put(API.BOARD, params);
+    
+    return response;
+  }
+
+  async remove(idx) {
+    const response = await this.#client.delete(`${API.BOARD}/${idx}`);
+
+    return response;
+  }
+
 }
